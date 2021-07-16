@@ -34,6 +34,9 @@ async def verify(request: Request, guild: str) -> None:
     if not user:
         raise HTTPException(401)
 
+    if not await db.auth_user(int(user), int(guild)):
+        raise HTTPException(403)
+
 @router.get("/login")
 async def login() -> None:
     return oauth.redirect()

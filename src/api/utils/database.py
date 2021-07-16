@@ -33,10 +33,12 @@ class Database:
         return ""
 
     async def grant_user(self, guild: int, user: int) -> None:
-        pass
+        await self._pool.execute("INSERT INTO GuildAccess VALUES ($1, $2) ON CONFLICT DO NOTHING;", guild, user)
 
     async def delete_user(self, guild: int, user: int) -> None:
-        pass
+        await self._pool.execute("DELETE FROM GuildAccess WHERE guild_id = $1 AND member_id = $2;", guild, user)
 
     async def auth_user(self, guild: int, user: int) -> bool:
-        pass
+        return bool(
+            await self._pool.fetchrow("SELECT * FROM GuildAccess WHERE guild_id = $1 AND member_id = $2;", guild, user)
+        )
