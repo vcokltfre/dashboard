@@ -50,7 +50,10 @@ async def callback(code: str, request: Request) -> RedirectResponse:
 
 @router.get("/guilds/{guild_id}/config")
 async def get_guild_config(guild_id: str, request: Request) -> dict:
-    await verify(request, guild_id)
+    try:
+        await verify_internal(request)
+    except Exception:
+        await verify(request, guild_id)
 
     config = await request.state.db.get_config(int(guild_id))
 
