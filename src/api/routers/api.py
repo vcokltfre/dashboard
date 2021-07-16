@@ -6,7 +6,7 @@ from fastapi.responses import RedirectResponse
 from oauthlib.oauth2.rfc6749.errors import OAuth2Error
 from starlette_discord import DiscordOAuthClient
 
-from src.api.env import Discord, Site
+from src.api.env import Auth, Discord, Site
 from src.api.models import SetConfig
 from src.api.utils.database import Database
 from src.api.utils.redis import RedisCache
@@ -33,6 +33,9 @@ async def verify(request: Request, guild: str) -> None:
 
     if not user:
         raise HTTPException(401)
+
+    if user in Auth.admins:
+        return
 
     if not await db.auth_user(int(user), int(guild)):
         raise HTTPException(403)
