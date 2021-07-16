@@ -14,3 +14,29 @@ class Database:
         logger.info("Connecting to Postgres...")
         self._pool = await create_pool(DB.uri)
         logger.info("Postgers connected.")
+
+        with open("src/api/data/init.sql") as f:
+            await self._pool.execute(f.read())
+
+    async def set_config(self, guild: int, value: str) -> None:
+        await self._pool.execute(
+            "INSERT INTO Guilds VALUES ($1, $2) ON CONFLICT (id) DO UPDATE SET config = $2;",
+            guild,
+            value,
+        )
+
+    async def get_config(self, guild: int) -> str:
+        data = await self._pool.fetchrow("SELECT (config) FROM Guilds WHERE id = $1;", guild)
+
+        if data:
+            return data["config"]
+        return ""
+
+    async def grant_user(self, guild: int, user: int) -> None:
+        pass
+
+    async def delete_user(self, guild: int, user: int) -> None:
+        pass
+
+    async def auth_user(self, guild: int, user: int) -> bool:
+        pass
