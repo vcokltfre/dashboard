@@ -18,3 +18,10 @@ rd = RedisCache()
 async def on_startup() -> None:
     await db.ainit()
     await rd.ainit()
+
+@app.middleware("http")
+async def attach(request, call_next):
+    request.state.db = db
+    request.state.rd = rd
+
+    return await call_next(request)
