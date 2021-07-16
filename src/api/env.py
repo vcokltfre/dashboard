@@ -1,4 +1,5 @@
 from os import getenv
+from secrets import token_hex
 
 from dotenv import load_dotenv
 
@@ -18,3 +19,8 @@ class Database:
 
 class Redis:
     uri: str = getenv("REDIS_URI", "redis://localhost:6379")
+
+
+class Auth:
+    admins: list = getenv("SITE_ADMINS", "").split(";")
+    salt: str = getenv("SITE_SALT", token_hex(16))
