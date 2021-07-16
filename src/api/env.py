@@ -13,7 +13,7 @@ class Site:
 
 
 class Database:
-    uri: str = getenv("DATABASE_URI", "postgres://dashboard:dashboard@localhost:5432/dashboard")
+    uri: str = getenv("DATABASE_URI", "postgres://root:password@localhost:5432/dashboard")
 
 
 class Redis:
