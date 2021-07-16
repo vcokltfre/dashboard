@@ -76,7 +76,7 @@ async def grant_guild_access(guild_id: int, user_id: int, request: Request) -> N
 
     await request.state.db.grant_user(guild_id, user_id)
 
-@router.delete("/guilds/{guild_id}/config/{user_id}")
+@router.delete("/guilds/{guild_id}/access/{user_id}")
 async def delete_guild_access(guild_id: int, user_id: int, request: Request) -> None:
     await verify_internal(request)
 
