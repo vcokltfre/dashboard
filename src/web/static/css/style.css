@@ -23,6 +23,27 @@ header nav a, header nav a:hover, header nav a:focus, header nav a:visited {
 main {
   flex-grow: 1;
 }
+main .middle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main .home-parallel {
+  margin-top: 6em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+main .home-parallel .icon img {
+  border-radius: 50%;
+  width: 15em;
+  height: 15em;
+}
+main .home-parallel .buttons {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2em;
+}
 
 footer {
   background-color: #131115;
@@ -32,6 +53,31 @@ footer {
 
 a {
   text-decoration: none;
+  color: #84b2d8;
+}
+
+.btn {
+  min-width: 7em;
+  padding: 0.25em;
+  border-radius: 0.5em;
+  background-color: #71afff;
+  border-style: none;
+}
+
+.btn:hover {
+  background-color: #85baff;
+}
+
+.btn:active {
+  background-color: #5da4ff;
+}
+
+.btn-large {
+  font-size: 2em;
+}
+
+.mt-1 {
+  margin-top: 1em;
 }
 
 /*# sourceMappingURL=style.css.map */

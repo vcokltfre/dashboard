@@ -2,6 +2,8 @@ $color-bg: #1e1a20;
 $color-bg-dark: darken($color-bg, 4%);
 $color-bg-light: lighten($color-bg, 4%);
 $color-fg: #f6f6f6;
+$color-fg-link: #84b2d8;
+$color-btn: #71afff;
 
 html {
   height: 100%;
@@ -31,6 +33,33 @@ header {
 
 main {
   flex-grow: 1;
+
+  .middle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .home-parallel {
+    margin-top: 6em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .icon {
+      img {
+        border-radius: 50%;
+        width: 15em;
+        height: 15em;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      margin-left: 2em;
+    }
+  }
 }
 
 footer {
@@ -41,4 +70,29 @@ footer {
 
 a {
   text-decoration: none;
+  color: $color-fg-link;
+}
+
+.btn {
+  min-width: 7em;
+  padding: 0.25em;
+  border-radius: 0.5em;
+  background-color: $color-btn;
+  border-style: none;
+}
+
+.btn:hover {
+  background-color: lighten($color-btn, 4%);
+}
+
+.btn:active {
+  background-color: darken($color-btn, 4%);
+}
+
+.btn-large {
+  font-size: 2em;
+}
+
+.mt-1 {
+  margin-top: 1em;
 }

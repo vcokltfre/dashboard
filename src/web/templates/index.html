@@ -1,0 +1,15 @@
+{% extends "_base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="middle">
+  <div class="home-parallel">
+    <div class="icon">
+      <img src="{{ site.icon }}">
+    </div>
+    <div class="buttons">
+      <button type="button" class="btn btn-large" onclick="window.location.href='/dash'">Dashboard</button>
+      <button type="button" class="btn btn-large mt-1" onclick="window.location.href='{{ site.repo }}'">GitHub</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
