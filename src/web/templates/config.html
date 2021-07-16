@@ -12,22 +12,22 @@
   <script src="/static/monaco/min/vs/loader.js"></script>
   <script>
     const guild = "{{ guild.id }}";
+    let value = "";
 
-    function get() {
-      fetch(`/guilds/${guild}/config/raw`).then(response => {
-        if (response.status === 200) {
-          response.json().then(data => {
-            return data.value;
-          })
-        }
-        alert("Couldn't load the config value.");
-      })
-    }
+    fetch(`/api/guilds/${guild}/config`).then(response => {
+      if (response.status === 200) {
+        response.json().then(data => {
+          value = data.value;
+        })
+      } else {
+        alert("Failed to load config value.");
+      }
+    })
 
     require.config({ paths: { 'vs': '/static/monaco/min/vs' }});
     require(['vs/editor/editor.main'], function() {
       window.editor = monaco.editor.create(document.getElementById('container'), {
-        value: get(),
+        value: value,
         language: "yaml",
         theme: "vs-dark",
         tabSize: 2
@@ -35,7 +35,7 @@
     });
 
     function save() {
-      post(`/guilds/${guild}/config`, {
+      post(`/api/guilds/${guild}/config`, {
         "value": window.editor.getValue
       });
     }
