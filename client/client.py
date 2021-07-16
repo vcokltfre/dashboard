@@ -40,3 +40,10 @@ class Dashclient:
             guild_id=guild,
             user_id=user
         ))
+
+    async def get_config(self, guild: int) -> str:
+        response = await self.session.get(
+            self.url("/api/guilds/{guild_id}/config", guild_id=guild)
+        )
+
+        return await response.text()
