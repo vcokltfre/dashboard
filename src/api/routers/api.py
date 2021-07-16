@@ -21,7 +21,7 @@ async def login() -> None:
     return oauth.redirect()
 
 @router.get("/callback")
-async def callback(code: str, request: Request) -> None:
+async def callback(code: str, request: Request) -> RedirectResponse:
     try:
         user = await oauth.login(code)
     except OAuth2Error:
