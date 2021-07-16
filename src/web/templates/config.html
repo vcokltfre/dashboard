@@ -1,5 +1,8 @@
 {% extends "_base.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}Config - {{ guild.name }}{% endblock %}
+{% block pre %}/ {% endblock %}
+{% block navtitle %}{{ guild.name }} {% endblock %}
+{% block post %}/ config{% endblock %}
 {% block content %}
 <div class="config">
   <div class="content">

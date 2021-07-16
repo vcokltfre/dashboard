@@ -19,6 +19,9 @@ header nav a, header nav a:hover, header nav a:focus, header nav a:visited {
   color: #f6f6f6;
   margin-left: 0.25em;
 }
+header nav .special {
+  color: #ff6d6d;
+}
 
 main {
   flex-grow: 1;

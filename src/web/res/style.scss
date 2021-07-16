@@ -3,6 +3,7 @@ $color-bg-dark: darken($color-bg, 4%);
 $color-bg-light: lighten($color-bg, 4%);
 $color-fg: #f6f6f6;
 $color-fg-link: #84b2d8;
+$color-fg-special: #ff6d6d;
 $color-btn: #71afff;
 
 html {
@@ -27,6 +28,10 @@ header {
     a, a:hover, a:focus, a:visited {
       color: $color-fg;
       margin-left: 0.25em;
+    }
+
+    .special {
+      color: $color-fg-special;
     }
   }
 }
