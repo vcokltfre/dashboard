@@ -44,6 +44,42 @@ main .home-parallel .buttons {
   flex-direction: column;
   margin-left: 2em;
 }
+main .guilds {
+  margin: 1em;
+  display: flex;
+  flex-wrap: wrap;
+}
+main .guilds .guild {
+  background-color: #29232b;
+  width: 12em;
+  min-height: 16em;
+  border-radius: 0.5em;
+  margin: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  word-wrap: break-word;
+}
+main .guilds .guild p {
+  max-width: 10em;
+}
+main .guilds .guild img {
+  width: 8em;
+  height: 8em;
+  margin-top: 1em;
+  border-radius: 50%;
+}
+main .guilds .guild button {
+  border-radius: 0.5em;
+  padding: 0.5em;
+  width: 10em;
+  border-style: none;
+  background-color: #3e3542;
+  color: #f6f6f6;
+}
+main .guilds .guild button:hover {
+  background-color: #332c37;
+}
 
 footer {
   background-color: #131115;

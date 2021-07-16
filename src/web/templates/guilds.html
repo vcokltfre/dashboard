@@ -1,0 +1,13 @@
+{% extends "_base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="guilds">
+  {% for guild in guilds -%}
+  <div class="guild">
+    <img src="{{ guild.icon }}">
+    <p>{{ guild.name }}</p>
+    <button type="button" onclick="window.location.href='/guilds/{{ guild.id }}/config'">Configure</button>
+  </div>
+  {%- endfor %}
+</div>
+{% endblock %}
