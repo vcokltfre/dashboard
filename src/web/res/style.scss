@@ -1,0 +1,44 @@
+$color-bg: #1e1a20;
+$color-bg-dark: darken($color-bg, 4%);
+$color-bg-light: lighten($color-bg, 4%);
+$color-fg: #f6f6f6;
+
+html {
+  height: 100%;
+
+  body {
+    display: flex;
+    min-height: 100%;
+    flex-flow: column nowrap;
+    margin: 0;
+    background-color: $color-bg;
+    color: $color-fg;
+    font-family: 'Open Sans', sans-serif;
+  }
+}
+
+header {
+  nav {
+    background-color: $color-bg-dark;
+    font-size: 2em;
+
+    a, a:hover, a:focus, a:visited {
+      color: $color-fg;
+      margin-left: 0.25em;
+    }
+  }
+}
+
+main {
+  flex-grow: 1;
+}
+
+footer {
+  background-color: $color-bg-dark;
+  padding: 0.25em;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+}
