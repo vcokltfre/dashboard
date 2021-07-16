@@ -102,6 +102,39 @@ main {
       }
     }
   }
+
+  .config {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    button {
+      margin-top: 0.5em;
+      border-radius: 0.5em;
+      padding: 0.5em;
+      width: 10em;
+      border-style: none;
+      background-color: lighten($color-bg-light, 8%);
+      color: #f6f6f6;
+    }
+
+    button:hover {
+      background-color: lighten($color-bg-light, 4%);
+    }
+
+    .editor {
+      padding: 0.5em;
+      border-radius: 0.5em;
+      border: 1px solid grey;
+      background-color: #1e1e1e;
+      margin-top: 2em;
+
+      #container {
+        width:90em;
+        height:45em;
+      }
+    }
+  }
 }
 
 footer {

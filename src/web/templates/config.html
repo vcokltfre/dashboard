@@ -1,0 +1,33 @@
+{% extends "_base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="config">
+  <div class="content">
+    <div class="editor">
+      <div id="container"></div>
+    </div>
+    <button type="button" onclick="save()">Save</button>
+  </div>
+
+  <script src="/static/monaco/min/vs/loader.js"></script>
+  <script>
+    require.config({ paths: { 'vs': '/static/monaco/min/vs' }});
+    require(['vs/editor/editor.main'], function() {
+      window.editor = monaco.editor.create(document.getElementById('container'), {
+        value: "abc: 123",
+        language: "yaml",
+        theme: "vs-dark"
+      });
+    });
+  </script>
+  <script>
+    const guild = "{{ guild.id }}";
+
+    function save() {
+      post(`/guilds/${guild}/config`, {
+        "value": window.editor.getValue
+      });
+    }
+  </script>
+</div>
+{% endblock %}

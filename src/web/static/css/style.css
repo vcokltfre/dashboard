@@ -80,6 +80,34 @@ main .guilds .guild button {
 main .guilds .guild button:hover {
   background-color: #332c37;
 }
+main .config {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main .config button {
+  margin-top: 0.5em;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  width: 10em;
+  border-style: none;
+  background-color: #3e3542;
+  color: #f6f6f6;
+}
+main .config button:hover {
+  background-color: #332c37;
+}
+main .config .editor {
+  padding: 0.5em;
+  border-radius: 0.5em;
+  border: 1px solid grey;
+  background-color: #1e1e1e;
+  margin-top: 2em;
+}
+main .config .editor #container {
+  width: 90em;
+  height: 45em;
+}
 
 footer {
   background-color: #131115;

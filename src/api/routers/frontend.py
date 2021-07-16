@@ -22,5 +22,13 @@ async def get_guilds(request: Request) -> HTMLResponse:
     return templates.TemplateResponse("guilds.html", {
         "request": request,
         "site": Site,
-        "guilds": []
+        "guilds": [],
+    })
+
+@router.get("/guilds/{guild_id}/config")
+async def get_guild_config(guild_id: str, request: Request) -> HTMLResponse:
+    return templates.TemplateResponse("config.html", {
+        "request": request,
+        "site": Site,
+        "guild": Guild("", "", "123"),
     })
