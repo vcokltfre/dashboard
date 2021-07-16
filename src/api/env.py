@@ -11,6 +11,7 @@ class Site:
     name: str = getenv("SITE_NAME", "Dashboard")
     icon: str = getenv("SITE_ICON", "https://avatars.githubusercontent.com/u/16879430?v=4")
     repo: str = getenv("SITE_REPO", "https://github.com/vcokltfre/dashboard")
+    link: str = getenv("SITE_BASE", "http://localhost:8000")
 
 
 class Database:
@@ -24,3 +25,8 @@ class Redis:
 class Auth:
     admins: list = getenv("SITE_ADMINS", "").split(";")
     salt: str = getenv("SITE_SALT", token_hex(16))
+
+
+class Discord:
+    client_id: str = getenv("DISCORD_CLIENT_ID")
+    client_secret: str = getenv("DISCORD_CLIENT_SECRET")

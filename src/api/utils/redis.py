@@ -14,7 +14,7 @@ class RedisCache:
 
     @staticmethod
     def session_hash(token: str) -> None:
-        return sha256(token + Auth.salt).hexdigest()
+        return sha256((token + Auth.salt).encode()).hexdigest()
 
     async def ainit(self) -> None:
         logger.info("Connecting to Redis...")
