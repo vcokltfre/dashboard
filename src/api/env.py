@@ -25,6 +25,7 @@ class Redis:
 class Auth:
     admins: list = getenv("SITE_ADMINS", "").split(";")
     salt: str = getenv("SITE_SALT", token_hex(16))
+    internal: str = getenv("INTERNAL_TOKEN")
 
 
 class Discord:

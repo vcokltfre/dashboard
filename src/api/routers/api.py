@@ -1,3 +1,4 @@
+from hmac import compare_digest
 from secrets import token_hex
 
 from fastapi import APIRouter, Request
@@ -8,8 +9,7 @@ from starlette_discord import DiscordOAuthClient
 
 from src.api.env import Auth, Discord, Site
 from src.api.models import SetConfig
-from src.api.utils.database import Database
-from src.api.utils.redis import RedisCache
+from src.api.utils.auth import verify
 
 
 router = APIRouter(prefix="/api")
@@ -20,25 +20,14 @@ oauth = DiscordOAuthClient(
     Site.link + "/api/callback",
 )
 
-async def verify(request: Request, guild: str) -> None:
-    db: Database = request.state.db
-    redis: RedisCache = request.state.rd
-
-    token = request.cookies.get("confd_api_key")
+async def verify_internal(request: Request) -> None:
+    token = request.headers.get("Authorization")
 
     if not token:
         raise HTTPException(401)
 
-    user = await redis.get_session(token)
-
-    if not user:
+    if not compare_digest(token, Auth.internal):
         raise HTTPException(401)
-
-    if user in Auth.admins:
-        return
-
-    if not await db.auth_user(int(user), int(guild)):
-        raise HTTPException(403)
 
 @router.get("/login")
 async def login() -> None:
@@ -74,3 +63,25 @@ async def set_guild_config(guild_id: str, config: SetConfig, request: Request) -
     await verify(request, guild_id)
 
     await request.state.db.set_config(int(guild_id), config.value)
+
+@router.post("/guilds/{guild_id}")
+async def create_guild(guild_id: str, icon_url: str, name: str, request: Request) -> None:
+    await verify_internal(request)
+
+    await request.state.db.create_guild(int(guild_id), icon_url, name)
+
+@router.post("/guilds/{guild_id}/access/{user_id}")
+async def grant_guild_access(guild_id: int, user_id: int, request: Request) -> None:
+    await verify_internal(request)
+
+    await request.state.db.grant_user(guild_id, user_id)
+
+@router.delete("/guilds/{guild_id}/config/{user_id}")
+async def delete_guild_access(guild_id: int, user_id: int, request: Request) -> None:
+    await verify_internal(request)
+
+    await request.state.db.delete_user(guild_id, user_id)
+
+@router.get("/guilds")
+async def get_guilds(request: Request) -> list:
+    await verify_internal(request)
